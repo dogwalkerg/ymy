@@ -1,94 +1,112 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>世界实时时间和日期</title>
-    <script>
-      // 获取当前时间并更新每秒钟显示
-      setInterval(function () {
-        var date = new Date();
-        document.getElementById("beijing").innerHTML = date.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
-        document.getElementById("tokyo").innerHTML = date.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
-        document.getElementById("sydney").innerHTML = date.toLocaleString('en-AU', { timeZone: 'Australia/Sydney' });
-        document.getElementById("london").innerHTML = date.toLocaleString('en-GB', { timeZone: 'Europe/London' });
-        document.getElementById("paris").innerHTML = date.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
-        document.getElementById("moscow").innerHTML = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' });
-        document.getElementById("new-york").innerHTML = date.toLocaleString('en-US', { timeZone: 'America/New_York' });
-        document.getElementById("los-angeles").innerHTML = date.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
-        document.getElementById("chicago").innerHTML = date.toLocaleString('en-US', { timeZone: 'America/Chicago' });
-        document.getElementById("toronto").innerHTML = date.toLocaleString('en-CA', { timeZone: 'America/Toronto' });
-      }, 1000);
-    </script>
-    <style>
-      // 定义样式
-      body {
-        background-color: black;
-        color: white;
-        font-family: Arial, sans-serif;
-      }
-      .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        padding: 20px;
-        border: 2px solid white;
-        margin: 10px;
-      }
-      .city {
-        margin: 10px;
-        padding: 10px;
-        font-size: 28px;
-        text-align: center;
-        border: 2px solid white;
-      }
-      .time {
-        font-size: 60px;
-        margin: 20px;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="city">
-        北京 <br />
-        <span id="beijing" class="time"></span>
-      </div>
-      <div class="city">
-        东京 <br />
-        <span id="tokyo" class="time"></span>
-      </div>
-      <div class="city">
-        悉尼 <br />
-        <span id="sydney" class="time"></span>
-      </div>
-      <div class="city">
-        伦敦 <br />
-        <span id="london" class="time"></span>
-      </div>
-      <div class="city">
-        巴黎 <br />
-        <span id="paris" class="time"></span>
-      </div>
-      <div class="city">
-        莫斯科 <br />
-        <span id="moscow" class="time"></span>
-      </div>
-      <div class="city">
-        纽约 <br />
-        <span id="new-york" class="time"></span>
-      </div>
-      <div class="city">
-        洛杉矶 <br />
-        <span id="los-angeles" class="time"></span>
-      </div>
-      <div class="city">
-        芝加哥 <br />
-        <span id="chicago" class="time"></span>
-      </div>
-      <div class="city">
-        多伦多 <br />
-        <span id="toronto" class="time"></span>
-      </div>
-    </div>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <title>国际时间</title>
+        <style>
+            body {
+                background-color: black;
+            }
+            .clock {
+                display: inline-block;
+                color: white;
+                font-size: 90px;
+                font-family: Helvetica, sans-serif;
+                margin: 50px;
+                padding: 25px;
+                border: 2px solid white;
+                border-radius: 25px;
+                box-shadow: 0px 12px 18px -6px rgba(255,255,255,0.25);
+                text-align: center;
+            }
+            .clock .date {
+                font-size: 40px;
+                margin-top: 15px;
+                font-family: Arial, sans-serif;
+            }
+            .clock .second {
+                animation: spin 60s linear infinite;
+            }
+            @keyframes spin {
+                100% {transform: rotate(360deg);}
+            }
+        </style>
+    </head>
+    <body>
+        <div class="clock">
+            <div class="location">中国</div>
+            <div class="time"></div>
+            <div class="date"></div>
+        </div>
+        <div class="clock">
+            <div class="location">美国</div>
+            <div class="time"></div>
+            <div class="date"></div>
+        </div>
+        <div class="clock">
+            <div class="location">日本</div>
+            <div class="time"></div>
+            <div class="date"></div>
+        </div>
+        <div class="clock">
+            <div class="location">台湾</div>
+            <div class="time"></div>
+            <div class="date"></div>
+        </div>
+        <div class="clock">
+            <div class="location">新加坡</div>
+            <div class="time"></div>
+            <div class="date"></div>
+        </div>
+        <div class="clock">
+            <div class="location">香港</div>
+            <div class="time"></div>
+            <div class="date"></div>
+        </div>
+        <script>
+            function updateClock() {
+                var clocks = document.querySelectorAll('.clock');
+                for (var i = 0; i < clocks.length; i++) {
+                    var timezone = clocks[i].querySelector('.location').textContent;
+                    if (timezone == '中国') {
+                        var offset = 8;
+                    } else if (timezone == '美国') {
+                        var offset = -5;
+                    } else if (timezone == '日本') {
+                        var offset = 9;
+                    } else if (timezone == '台湾') {
+                        var offset = 8;
+                    } else if (timezone == '新加坡') {
+                        var offset = 8;
+                    } else if (timezone == '香港') {
+                        var offset = 8;
+                    }
+                    var date = new Date();
+                    var utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+                    var time = new Date(utc + (offset * 3600000));
+                    var hours = time.getHours();
+                    var minutes = time.getMinutes();
+                    var seconds = time.getSeconds();
+                    var month = time.getMonth() + 1;
+                    var day = time.getDate();
+                    var year = time.getFullYear();
+                    if (hours <= 9) {
+                        hours = '0' + hours;
+                    }
+                    if (minutes <= 9) {
+                        minutes = '0' + minutes;
+                    }
+                    if (seconds <= 9) {
+                        seconds = '0' + seconds;
+                    }
+                    var timeString = hours + ':' + minutes + ':' + seconds;
+                    var dateString = year + '-' + month + '-' + day;
+                    clocks[i].querySelector('.time').textContent = timeString;
+                    clocks[i].querySelector('.date').textContent = dateString;
+                }
+                setTimeout(updateClock, 1000);
+            }
+            updateClock();
+        </script>
+    </body>
 </html>
