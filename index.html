@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>时钟</title>
+	<style type="text/css">
+		body {
+			margin: 0;
+			padding: 0;
+			background: #1a1a1a;
+			color: white;
+			font-family: Arial, sans-serif;
+		}
+		#clock {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+		}
+		#clock span {
+			font-size: 10rem;
+			font-weight: bold;
+		}
+	</style>
+	<script type="text/javascript">
+		function updateTime() {
+			var date = new Date();
+			var hours = date.getHours();
+			var minutes = date.getMinutes();
+			var seconds = date.getSeconds();
+			hours = (hours < 10 ? "0" : "") + hours;
+			minutes = (minutes < 10 ? "0" : "") + minutes;
+			seconds = (seconds < 10 ? "0" : "") + seconds;
+			document.getElementById("clock").innerHTML = "<span>" + hours + ":" + minutes + ":" + seconds + "</span>";
+			setTimeout(updateTime, 1000);
+		}
+	</script>
+</head>
+<body onload="updateTime()">
+	<div id="clock"></div>
+</body>
+</html>
