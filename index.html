@@ -1,41 +1,94 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>时钟</title>
-	<style type="text/css">
-		body {
-			margin: 0;
-			padding: 0;
-			background: #1a1a1a;
-			color: white;
-			font-family: Arial, sans-serif;
-		}
-		#clock {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			height: 100vh;
-		}
-		#clock span {
-			font-size: 10rem;
-			font-weight: bold;
-		}
-	</style>
-	<script type="text/javascript">
-		function updateTime() {
-			var date = new Date();
-			var hours = date.getHours();
-			var minutes = date.getMinutes();
-			var seconds = date.getSeconds();
-			hours = (hours < 10 ? "0" : "") + hours;
-			minutes = (minutes < 10 ? "0" : "") + minutes;
-			seconds = (seconds < 10 ? "0" : "") + seconds;
-			document.getElementById("clock").innerHTML = "<span>" + hours + ":" + minutes + ":" + seconds + "</span>";
-			setTimeout(updateTime, 1000);
-		}
-	</script>
-</head>
-<body onload="updateTime()">
-	<div id="clock"></div>
-</body>
+  <head>
+    <title>世界实时时间和日期</title>
+    <script>
+      // 获取当前时间并更新每秒钟显示
+      setInterval(function () {
+        var date = new Date();
+        document.getElementById("beijing").innerHTML = date.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
+        document.getElementById("tokyo").innerHTML = date.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+        document.getElementById("sydney").innerHTML = date.toLocaleString('en-AU', { timeZone: 'Australia/Sydney' });
+        document.getElementById("london").innerHTML = date.toLocaleString('en-GB', { timeZone: 'Europe/London' });
+        document.getElementById("paris").innerHTML = date.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+        document.getElementById("moscow").innerHTML = date.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' });
+        document.getElementById("new-york").innerHTML = date.toLocaleString('en-US', { timeZone: 'America/New_York' });
+        document.getElementById("los-angeles").innerHTML = date.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
+        document.getElementById("chicago").innerHTML = date.toLocaleString('en-US', { timeZone: 'America/Chicago' });
+        document.getElementById("toronto").innerHTML = date.toLocaleString('en-CA', { timeZone: 'America/Toronto' });
+      }, 1000);
+    </script>
+    <style>
+      // 定义样式
+      body {
+        background-color: black;
+        color: white;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px;
+        border: 2px solid white;
+        margin: 10px;
+      }
+      .city {
+        margin: 10px;
+        padding: 10px;
+        font-size: 28px;
+        text-align: center;
+        border: 2px solid white;
+      }
+      .time {
+        font-size: 60px;
+        margin: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="city">
+        北京 <br />
+        <span id="beijing" class="time"></span>
+      </div>
+      <div class="city">
+        东京 <br />
+        <span id="tokyo" class="time"></span>
+      </div>
+      <div class="city">
+        悉尼 <br />
+        <span id="sydney" class="time"></span>
+      </div>
+      <div class="city">
+        伦敦 <br />
+        <span id="london" class="time"></span>
+      </div>
+      <div class="city">
+        巴黎 <br />
+        <span id="paris" class="time"></span>
+      </div>
+      <div class="city">
+        莫斯科 <br />
+        <span id="moscow" class="time"></span>
+      </div>
+      <div class="city">
+        纽约 <br />
+        <span id="new-york" class="time"></span>
+      </div>
+      <div class="city">
+        洛杉矶 <br />
+        <span id="los-angeles" class="time"></span>
+      </div>
+      <div class="city">
+        芝加哥 <br />
+        <span id="chicago" class="time"></span>
+      </div>
+      <div class="city">
+        多伦多 <br />
+        <span id="toronto" class="time"></span>
+      </div>
+    </div>
+  </body>
 </html>
